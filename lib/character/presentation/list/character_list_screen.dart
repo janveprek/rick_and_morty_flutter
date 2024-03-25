@@ -64,17 +64,15 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
                 context: context,
                 builder: (BuildContext context) {
                   return SizedBox(
-                    height: 400,
-                    child:
-                    FilterBottomSheet(
-                      open: true,
-                      onDismissRequest: () => Navigator.pop(context),
-                      selected: viewModel.charactersState.appliedFilter,
-                      onSubmitClick: (filter) => {
-                        viewModel.applyFilter(filter),
-                      },
-                    )
-                  );
+                      height: 400,
+                      child: FilterBottomSheet(
+                        open: true,
+                        onDismissRequest: () => Navigator.pop(context),
+                        selected: viewModel.charactersState.appliedFilter,
+                        onSubmitClick: (filter) => {
+                          viewModel.applyFilter(filter),
+                        },
+                      ));
                 },
               );
             },
