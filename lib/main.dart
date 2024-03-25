@@ -28,9 +28,11 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
           useMaterial3: true,
+          textTheme: const RickAndMortyTheme().textTheme,
           colorScheme: RickAndMortyTheme.lightScheme().toColorScheme()),
       darkTheme: ThemeData(
           useMaterial3: true,
+          textTheme: const RickAndMortyTheme().textTheme,
           colorScheme: RickAndMortyTheme.darkScheme().toColorScheme()),
       home: const CharacterListScreen(),
     );

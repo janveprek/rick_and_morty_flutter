@@ -1,9 +1,17 @@
 import "package:flutter/material.dart";
 
 class RickAndMortyTheme {
-  final TextTheme textTheme;
+  final TextTheme textTheme = const TextTheme(
+      titleMedium: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 14,
+      )
+  );
 
-  const RickAndMortyTheme(this.textTheme);
+  const RickAndMortyTheme();
 
   static MaterialScheme lightScheme() {
     return const MaterialScheme(
