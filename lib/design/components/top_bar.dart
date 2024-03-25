@@ -45,7 +45,7 @@ class AppSearchBar extends StatefulWidget implements PreferredSizeWidget {
   _AppSearchBarState createState() => _AppSearchBarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(72);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 class _AppSearchBarState extends State<AppSearchBar> {
@@ -62,54 +62,37 @@ class _AppSearchBarState extends State<AppSearchBar> {
   Widget build(BuildContext context) {
     return SearchAnchor(
       builder: (BuildContext context, SearchController controller) {
-        return Padding(
-            padding: const EdgeInsets.symmetric(vertical: paddingSmall),
-            child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                      child: SearchBar(
-                          hintText: "Search characters",
-                          padding: const MaterialStatePropertyAll<EdgeInsets>(
-                              EdgeInsets.symmetric(horizontal: paddingMedium)),
-                          onTap: () {
-                            controller.openView();
-                          },
-                          onChanged: (text) {
-                            widget.onQueryChange(text);
-                            controller.openView();
-                          },
-                          onSubmitted: (text) {
-                            widget.onSearch(text);
-                            controller.closeView(text);
-                          },
-                          shadowColor:
-                              MaterialStateProperty.all(Colors.transparent),
-                          leading: const Icon(Icons.search),
-                          trailing: controller.text.isNotEmpty
-                              ? <Widget>[
-                                  IconButton(
-                                    icon: const Icon(Icons.clear),
-                                    onPressed: () {
-                                      controller.clear();
-                                      widget.onSearch(controller.text);
-                                    },
-                                  ),
-                                ]
-                              : null)),
-                  SizedBox(
-                      width: 48,
-                      height: 48,
-                      child: IconButton(
-                        icon: const Icon(Icons.tune),
-                        onPressed: widget.onFilterClick,
-                      ))
-                ]));
+        return SearchBar(
+            hintText: "Search characters",
+            onTap: () {
+              controller.openView();
+            },
+            onChanged: (text) {
+              widget.onQueryChange(text);
+              controller.openView();
+            },
+            onSubmitted: (text) {
+              widget.onSearch(text);
+              controller.closeView(text);
+            },
+            leading: const Icon(Icons.search),
+            trailing: controller.text.isNotEmpty
+                ? <Widget>[
+                    IconButton(
+                      icon: const Icon(Icons.clear),
+                      onPressed: () {
+                        controller.clear();
+                        widget.onSearch(controller.text);
+                      },
+                    ),
+                  ]
+                : null);
       },
       suggestionsBuilder:
           (BuildContext context, SearchController controller) async {
         _searchingWithQuery = controller.text;
-        final List<String> options = widget.characters.map((e) => e.name).toList();
+        final List<String> options =
+            widget.characters.map((e) => e.name).toList();
         if (_searchingWithQuery != controller.text) {
           return _lastOptions;
         }
