@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rick_and_morty_flutter/character/presentation/favorite/favorite_characters_screen.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../character/presentation/list/character_list_screen.dart';
 
 class BottomBar extends StatelessWidget {
@@ -37,11 +37,11 @@ class BottomBar extends StatelessWidget {
                 'assets/icons/characters_all.svg',
                 semanticsLabel: 'Characters'
             ),
-          label: 'Characters',
+          label: AppLocalizations.of(context)!.bottom_bar_characters,
         ),
-        const NavigationDestination(
-          icon: Icon(Icons.favorite),
-          label: 'Favourites',
+        NavigationDestination(
+          icon: const Icon(Icons.favorite),
+          label: AppLocalizations.of(context)!.bottom_bar_favourites,
         ),
       ],
     );

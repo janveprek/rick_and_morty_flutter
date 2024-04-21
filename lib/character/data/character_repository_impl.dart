@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:logger/logger.dart';
 import 'package:rick_and_morty_flutter/character/data/character_api.dart';
 import 'package:rick_and_morty_flutter/character/data/character_db.dart';
 import 'package:rick_and_morty_flutter/character/domain/character_repository.dart';

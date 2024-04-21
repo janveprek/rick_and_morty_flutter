@@ -47,7 +47,7 @@ class CharacterItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(cornerRadiusMedium),
-          color: Colors.grey, // Set your desired color
+          color: Colors.grey,
         ),
         margin: const EdgeInsets.symmetric(vertical: paddingSmall),
         padding: const EdgeInsets.all(paddingSmall),

@@ -10,7 +10,6 @@ class FavoriteCharactersState {
     this.state = const LoadingState(),
   });
 
-  // Metoda pro vytvoření nové instance s upravenými hodnotami
   FavoriteCharactersState copyWith({
     List<CharacterModel>? characters,
     ScreenState? state,

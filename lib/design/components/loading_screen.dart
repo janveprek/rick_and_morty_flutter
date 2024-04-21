@@ -4,14 +4,16 @@ import 'package:shimmer/shimmer.dart';
 class CharacterShimmerList extends StatelessWidget {
   static const int itemCount = 20;
 
+  const CharacterShimmerList({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child: ListView.builder(
       itemCount: itemCount,
       itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+        return const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
           child: CharacterShimmerItem(),
         );
       },
@@ -20,12 +22,13 @@ class CharacterShimmerList extends StatelessWidget {
 }
 
 class CharacterShimmerItem extends StatelessWidget {
+  const CharacterShimmerItem({super.key});
+
   @override
   Widget build(BuildContext context) {
-    const double iconSizeLarge = 60.0; // Přizpůsobte velikost ikony
-    const double cardHeight = 100.0; // Přizpůsobte výšku karty
-    const double cornerRadiusMedium = 10.0; // Přizpůsobte zaoblení rohů
-    const double paddingSmall = 8.0; // Přizpůsobte padding
+    const double iconSizeLarge = 60.0;
+    const double cornerRadiusMedium = 10.0;
+    const double paddingSmall = 8.0;
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -49,10 +52,8 @@ class CharacterShimmerItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   ShimmerPlaceholder(height: 20.0, width: 100.0),
-                  // PLACEHOLDER_TEXT_LONG_IN_DP
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   ShimmerPlaceholder(height: 15.0, width: 50.0),
-                  // PLACEHOLDER_TEXT_SHORT_IN_DP
                 ],
               ),
             ),

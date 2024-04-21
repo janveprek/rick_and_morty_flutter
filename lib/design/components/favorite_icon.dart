@@ -24,7 +24,7 @@ class FavouriteIcon extends StatelessWidget {
         child: Icon(
           isFavourite ? Icons.favorite : Icons.favorite_border,
           size: iconSizeSmall,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
         ),
       ),
     );

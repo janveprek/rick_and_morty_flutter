@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty_flutter/character/presentation/detail/character_detail_view_model.dart';
 import 'package:rick_and_morty_flutter/character/presentation/detail/state/character_detail_state.dart';
@@ -10,7 +9,6 @@ import 'package:rick_and_morty_flutter/design/dimensions.dart';
 import 'package:rick_and_morty_flutter/locator.dart';
 
 const double avatarSizeInDp = 120.0;
-var logger = Logger();
 
 class CharacterDetailScreen extends StatefulWidget {
   final int id;
@@ -61,7 +59,7 @@ class CharacterDetailScreenContent extends StatelessWidget {
     final character = state.character;
 
     return Scaffold(
-        appBar: const TopBar(title: "Character"),
+        appBar: TopBar(title: character?.name ?? ""),
         body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -69,6 +67,7 @@ class CharacterDetailScreenContent extends StatelessWidget {
                 children: [
               if (character != null) ...[
                 Header(name: character.name, iconUrl: character.iconUrl),
+                const Divider(),
                 InfoPair(title: "Status", value: character.status),
                 InfoPair(title: "Species", value: character.species),
                 InfoPair(title: "Type", value: character.type),
@@ -100,7 +99,7 @@ class InfoPair extends StatelessWidget {
           Text(title),
           Text(
             value,
-            style: const TextStyle(),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ],
       ),

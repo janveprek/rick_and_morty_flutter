@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:rick_and_morty_flutter/character/data/character_api.dart';
 import 'package:rick_and_morty_flutter/character/data/entity/character_detail_dto.dart';
+import 'package:rick_and_morty_flutter/character/presentation/list/character_list_screen.dart';
 
 import '../data/entity/paged_result_dto.dart';
 import '../model/filter.dart';
@@ -24,7 +25,11 @@ class CharacterApiImpl implements CharacterApi {
     final response = await httpClient.get(
       Uri.parse('https://rickandmortyapi.com/api/character/?name=$name&status=${filter.apiName}'),
     );
-    return PagedResultDto.fromJson(json.decode(response.body));
+    try {
+      return PagedResultDto.fromJson(json.decode(response.body));
+    } catch (e) {
+      return PagedResultDto(result: List.empty());
+    }
   }
 
   @override

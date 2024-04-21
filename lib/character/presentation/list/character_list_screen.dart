@@ -106,13 +106,6 @@ Widget characterListScreenContent({
       onTryAgainClick: onTryAgainClick,
     ),
     bottomNavigationBar: const BottomBar(currentPageIndex: 0),
-    // body: FilterBottomSheet(
-    //   open: state.openBottomSheet,
-    //   selected: state.appliedFilter,
-    //   onDismissRequest: closeBottomSheet,
-    //   onSubmitClick: applyFilters,
-    //   //... other parameters
-    // ),
   ));
 }
 
