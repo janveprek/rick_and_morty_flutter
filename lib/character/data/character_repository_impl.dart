@@ -1,6 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 
-import 'package:logger/logger.dart';
+import 'package:flutter/foundation.dart';
 import 'package:rick_and_morty_flutter/character/data/character_api.dart';
 import 'package:rick_and_morty_flutter/character/data/character_db.dart';
 import 'package:rick_and_morty_flutter/character/domain/character_repository.dart';
@@ -12,6 +13,7 @@ import 'package:rick_and_morty_flutter/character/model/result_wrapper.dart';
 class CharacterRepositoryImpl implements CharacterRepository {
   final CharacterApi charactersApi;
   final CharacterDatabase charactersDatabase;
+  final List<CharacterModel> favoriteCharacters = [];
 
   CharacterRepositoryImpl(this.charactersApi, this.charactersDatabase);
 
@@ -55,17 +57,29 @@ class CharacterRepositoryImpl implements CharacterRepository {
 
   @override
   Future<List<CharacterModel>> getFavouriteCharacters() async {
-    return charactersDatabase.getFavouriteCharacters();
+    if (kIsWeb) {
+      return favoriteCharacters;
+    } else {
+      return charactersDatabase.getFavouriteCharacters();
+    }
   }
 
   @override
   Future<void> addCharacterToFavorites(CharacterModel character) async {
-    charactersDatabase.addCharacterToFavourites(character);
+    if (kIsWeb) {
+      favoriteCharacters.add(character);
+    } else {
+      charactersDatabase.addCharacterToFavourites(character);
+    }
   }
 
   @override
   Future<void> removeCharacterFromFavourites(CharacterModel character) async {
-    charactersDatabase.removeCharacterFromFavourites(character);
+    if (kIsWeb) {
+      favoriteCharacters.remove(character);
+    } else {
+      charactersDatabase.removeCharacterFromFavourites(character);
+    }
   }
 
   @override
