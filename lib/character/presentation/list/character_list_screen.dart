@@ -19,8 +19,6 @@ import '../../../design/components/bottom_bar.dart';
 import '../../../design/components/loading_screen.dart';
 import 'state/character_list_state.dart';
 
-var logger = Logger();
-
 class CharacterListScreen extends StatefulWidget {
   const CharacterListScreen({Key? key}) : super(key: key);
 
@@ -125,7 +123,6 @@ class CharacterList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logger.d("listScreen");
     return Column(
       children: [
         if (state.state is LoadingState) CharacterShimmerList(),
