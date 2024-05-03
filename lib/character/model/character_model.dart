@@ -49,4 +49,19 @@ class CharacterModel {
       isFavourite: map['isFavourite'] == 1,
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is CharacterModel &&
+              runtimeType == other.runtimeType &&
+              id == other.id &&
+              name == other.name &&
+              status == other.status &&
+              iconUrl == other.iconUrl &&
+              isFavourite == other.isFavourite;
+
+  @override
+  int get hashCode =>
+      id.hashCode ^ name.hashCode ^ status.hashCode ^ iconUrl.hashCode ^ isFavourite.hashCode;
 }

@@ -10,7 +10,9 @@ class ErrorState extends ScreenState {
   const ErrorState();
 }
 
-class EmptyState extends ScreenState {}
+class EmptyState extends ScreenState {
+  const EmptyState();
+}
 
 class SuccessState extends ScreenState {
 

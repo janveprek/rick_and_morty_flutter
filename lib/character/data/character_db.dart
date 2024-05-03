@@ -1,7 +1,7 @@
 import 'package:path/path.dart';
 import 'package:rick_and_morty_flutter/character/model/character_model.dart';
 import 'package:sqflite/sqflite.dart';
-
+// coverage:ignore-file
 abstract class CharacterDatabase {
   Future<Database> initDB();
 
