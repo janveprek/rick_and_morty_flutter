@@ -52,8 +52,7 @@ class CharactersListViewModel extends ChangeNotifier {
 
     if (index != -1) {
       var updatedCharacter = _charactersState.characters[index].copyWith(
-          isFavourite: !_charactersState.characters[index].isFavourite
-      );
+          isFavourite: !_charactersState.characters[index].isFavourite);
 
       if (updatedCharacter.isFavourite) {
         await addCharacterToFavorites(updatedCharacter);
@@ -61,8 +60,8 @@ class CharactersListViewModel extends ChangeNotifier {
         await removeCharacterFromFavorites(updatedCharacter);
       }
 
-      var updatedCharacters = List<CharacterModel>.from(
-          _charactersState.characters);
+      var updatedCharacters =
+          List<CharacterModel>.from(_charactersState.characters);
       updatedCharacters[index] = updatedCharacter;
       _charactersState =
           _charactersState.copyWith(characters: updatedCharacters);
@@ -71,22 +70,25 @@ class CharactersListViewModel extends ChangeNotifier {
   }
 
   void search(String query) async {
-    _charactersState = _charactersState.copyWith(state: const LoadingState());
-    notifyListeners();
+    if (query.isNotEmpty) {
+      _charactersState = _charactersState.copyWith(state: const LoadingState());
+      notifyListeners();
 
-    var result = await getCharactersByName(
-        query, filter: _charactersState.appliedFilter);
-    if (result is Success<List<CharacterModel>>) {
-      var characters = result.value;
-      _charactersState = _charactersState.copyWith(
-        state: characters.isNotEmpty ? const SuccessState() : EmptyState(),
-        query: query,
-        characters: characters,
-      );
-    } else if (result is Error) {
-      _charactersState = _charactersState.copyWith(state: const ErrorState());
+      var result = await getCharactersByName(query,
+          filter: _charactersState.appliedFilter);
+      if (result is Success<List<CharacterModel>>) {
+        var characters = result.value;
+        _charactersState = _charactersState.copyWith(
+          state:
+              characters.isNotEmpty ? const SuccessState() : const EmptyState(),
+          query: query,
+          characters: characters,
+        );
+      } else if (result is Error) {
+        _charactersState = _charactersState.copyWith(state: const ErrorState());
+      }
+      notifyListeners();
     }
-    notifyListeners();
   }
 
   void applyFilter(StatusFilter filter) {
@@ -97,6 +99,11 @@ class CharactersListViewModel extends ChangeNotifier {
 
   void openBottomSheet() {
     _charactersState = _charactersState.copyWith(openBottomSheet: true);
+    notifyListeners();
+  }
+
+  void closeBottomSheet() {
+    _charactersState = _charactersState.copyWith(openBottomSheet: false);
     notifyListeners();
   }
 }

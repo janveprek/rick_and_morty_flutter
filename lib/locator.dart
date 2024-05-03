@@ -38,7 +38,7 @@ void setupLocator() {
       RemoveCharacterFromFavoritesUseCaseImpl(locator()));
   locator.registerFactoryParam<CharacterDetailViewModel, int, dynamic>(
     (param1, _) =>
-        CharacterDetailViewModel(id: param1, getCharacterById: locator()),
+        CharacterDetailViewModel(id: param1, getCharacterById: locator(), addCharacterToFavorites: locator(), removeCharacterFromFavorites: locator()),
   );
   locator.registerFactory<CharactersListViewModel>(
     () => CharactersListViewModel(

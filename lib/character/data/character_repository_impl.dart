@@ -85,9 +85,11 @@ class CharacterRepositoryImpl implements CharacterRepository {
   @override
   Future<ResultWrapper<CharacterDetail>> getCharacterById(int id) async {
     try {
-      var character = await charactersApi
-          .getCharacterById(id)
-          .then((apiCharacter) => apiCharacter.toModel());
+      var character = await charactersApi.getCharacterById(id).then((apiCharacter) => apiCharacter.toModel());
+      var favourites = await charactersDatabase.getFavouriteCharacters();
+      if (favourites.any((fav) => fav.id == id)) {
+        character = character.copyWith(isFavourite: true);
+      }
       return Success(character);
     } on Exception catch (e) {
       return Error(e);

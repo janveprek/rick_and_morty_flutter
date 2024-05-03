@@ -8,6 +8,8 @@ import 'package:rick_and_morty_flutter/design/components/top_bar.dart';
 import 'package:rick_and_morty_flutter/design/dimensions.dart';
 import 'package:rick_and_morty_flutter/locator.dart';
 
+import '../../../design/components/favorite_icon.dart';
+
 const double avatarSizeInDp = 120.0;
 
 class CharacterDetailScreen extends StatefulWidget {
@@ -42,7 +44,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
               return ErrorScreen(tryAgain: () {});
             }
 
-            return CharacterDetailScreenContent(state: characterDetailState);
+            return CharacterDetailScreenContent(state: characterDetailState, toggleFavourite: viewModel.toggleFavourite);
           },
         ));
   }
@@ -50,8 +52,9 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
 
 class CharacterDetailScreenContent extends StatelessWidget {
   final CharacterDetailState state;
+  final VoidCallback toggleFavourite;
 
-  const CharacterDetailScreenContent({Key? key, required this.state})
+  const CharacterDetailScreenContent({Key? key, required this.state, required this.toggleFavourite})
       : super(key: key);
 
   @override
@@ -59,7 +62,13 @@ class CharacterDetailScreenContent extends StatelessWidget {
     final character = state.character;
 
     return Scaffold(
-        appBar: TopBar(title: character?.name ?? ""),
+        appBar: TopBar(title: character?.name ?? "", actions:
+            (BuildContext context) {
+        // Here, you can return your FavouriteIcon widget
+        return FavouriteIcon(
+            isFavourite: state.character?.isFavourite ?? false,
+            onClick: toggleFavourite
+        ); },),
         body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -127,7 +136,7 @@ class Header extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: paddingMedium),
+          padding: const EdgeInsets.only(left: paddingMedium),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -44,6 +44,9 @@ class FavoriteCharactersViewModel extends ChangeNotifier {
       _charactersState =
           _charactersState.copyWith(characters: updatedCharacters);
       notifyListeners();
+    } else {
+      _charactersState =
+          _charactersState.copyWith(state: LoadingState());
     }
   }
 
@@ -51,13 +54,16 @@ class FavoriteCharactersViewModel extends ChangeNotifier {
     _charactersState = _charactersState.copyWith(state: const LoadingState());
     notifyListeners();
 
-    var characters = await getFavoriteCharacters();
+    var favourites = await getFavoriteCharacters();
+    List<CharacterModel> characters = query.isNotEmpty
+        ? favourites.where((character) => character.name.toLowerCase().contains(query.toLowerCase().trim())).toList()
+        : favourites;
     updateState(characters);
   }
 
   void updateState(List<CharacterModel> characters) {
     _charactersState = _charactersState.copyWith(
-      state: characters.isNotEmpty ? const SuccessState() : EmptyState(),
+      state: characters.isNotEmpty ? const SuccessState() : const EmptyState(),
       characters: characters,
     );
     notifyListeners();
