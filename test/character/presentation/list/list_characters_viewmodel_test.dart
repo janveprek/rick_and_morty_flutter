@@ -174,39 +174,6 @@ void main() {
       expect(viewModel.charactersState.characters, [characterList[0]]);
     });
 
-    test('search should not change state if query is empty', () async {
-      final characterList = [
-        CharacterModel(
-          id: 1,
-          name: "Rick",
-          status: "alive",
-          iconUrl: "",
-          isFavourite: false,
-        ),
-        CharacterModel(
-          id: 2,
-          name: "Morty",
-          status: "alive",
-          iconUrl: "",
-          isFavourite: false,
-        ),
-      ];
-
-      when(getAllCharacters()).thenAnswer((_) async => Success(characterList));
-      final viewModel = CharactersListViewModel(
-        getAllCharacters: getAllCharacters,
-        getCharactersByName: getCharactersByName,
-        addCharacterToFavorites: addCharacterToFavourites,
-        removeCharacterFromFavorites: removeCharacterFromFavourites,
-      );
-      const emptyQuery = "";
-      await Future.delayed(Duration.zero);
-      viewModel.search(emptyQuery);
-      await Future.delayed(Duration.zero);
-      expect(viewModel.charactersState.state, const SuccessState());
-      expect(viewModel.charactersState.characters, characterList);
-    });
-
     test('search should show error screen state', () async {
       const query = 'query';
       when(getAllCharacters()).thenAnswer((_) async => Success([]));

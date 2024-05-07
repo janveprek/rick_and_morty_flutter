@@ -86,7 +86,7 @@ class CharacterRepositoryImpl implements CharacterRepository {
   Future<ResultWrapper<CharacterDetail>> getCharacterById(int id) async {
     try {
       var character = await charactersApi.getCharacterById(id).then((apiCharacter) => apiCharacter.toModel());
-      var favourites = await charactersDatabase.getFavouriteCharacters();
+      var favourites = await getFavouriteCharacters();
       if (favourites.any((fav) => fav.id == id)) {
         character = character.copyWith(isFavourite: true);
       }
