@@ -70,25 +70,23 @@ class CharactersListViewModel extends ChangeNotifier {
   }
 
   void search(String query) async {
-    if (query.isNotEmpty) {
-      _charactersState = _charactersState.copyWith(state: const LoadingState());
-      notifyListeners();
+    _charactersState = _charactersState.copyWith(state: const LoadingState());
+    notifyListeners();
 
-      var result = await getCharactersByName(query,
-          filter: _charactersState.appliedFilter);
-      if (result is Success<List<CharacterModel>>) {
-        var characters = result.value;
-        _charactersState = _charactersState.copyWith(
-          state:
-              characters.isNotEmpty ? const SuccessState() : const EmptyState(),
-          query: query,
-          characters: characters,
-        );
-      } else if (result is Error) {
-        _charactersState = _charactersState.copyWith(state: const ErrorState());
-      }
-      notifyListeners();
+    var result = await getCharactersByName(query,
+        filter: _charactersState.appliedFilter);
+    if (result is Success<List<CharacterModel>>) {
+      var characters = result.value;
+      _charactersState = _charactersState.copyWith(
+        state:
+            characters.isNotEmpty ? const SuccessState() : const EmptyState(),
+        query: query,
+        characters: characters,
+      );
+    } else if (result is Error) {
+      _charactersState = _charactersState.copyWith(state: const ErrorState());
     }
+    notifyListeners();
   }
 
   void applyFilter(StatusFilter filter) {
