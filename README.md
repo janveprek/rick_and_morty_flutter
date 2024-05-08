@@ -1,16 +1,10 @@
 # rick_and_morty_flutter
 
-A new Flutter project.
+This is a Flutter project targeting Android, iOS.
+
+It's an app based on TV series Rick and Morty. 
+UI of the screens is defined in Figma: https://www.figma.com/file/TRpNre9ykkxxLMDKQcUwLP/Rick-and-Morty-Design?type=design&node-id=0-1&mode=design&t=FeJwM5mrR0HqJChF-0
+
+This app uses https://rickandmortyapi.com/ API for making network calls.
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
